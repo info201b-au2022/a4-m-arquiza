@@ -1,45 +1,47 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
-date: '2022-11-01'
+title: "Inequality in Incarceration: Statistics"
+author: "Michelle Arquiza"
+date: '2022-11-22'
 output: html_document
 ---
 
-```{r echo=FALSE, eval=TRUE, message=FALSE}
-source("../source/a4-helpers.R")
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning = FALSE}
 source("../source/analysis.R")
 ```
 
 ## Abstract 
-[TODO: Include a short abstract (about 50 words)]
-
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
-```
+Within the past few decades, the population of people in jail has shot up--but not necessarily in a proportionate fashion. Due to the stark inequality of incarceration statistics among different racial groups, the main question of this report is how this inequality has developed and whether this inequality has grown or reduced (or fluctuated). To address this, I will analyze the different incarceration trends among different racial groups throughout the years; along with other facets of their intersectional identity such as gender, age, and location.
 
 ## Introduction 
-[TODO]
+American prison systems have been widely known to disproportionately incarcerate people of color. This obvious problem stems from systems of power, both socially and politically, that uphold racism and stereotypes throughout society in incarceration systems and in “normal” everyday social interactions—which causes these to feed and propagate upon one another. Adult people of color are directly affected by becoming victims of over-policing and blatant racism, while younger children of color are affected in two ways. One is directly through racism that’s supported by these displays; think, for example, discriminatory school policies, overpolicing of children of color, or ordinary interactions with bigoted people. Another is indirectly through the general attitude of society towards them. For example, this could mean always feeling lesser than and being seen as more “criminal”, which leads to misconceptions about the trajectory of their futures. As such, the research into this data set seeks to answer the questions: who are the people most affected by this overpolicing, and how has this changed over the years? Is American society developing to be less discriminatory, or does there seem to be no change? 
 
 ## Data Summary 
-[TODO]
+I wanted to see how the most current jail statistics were affected by disproportionate policing, so I decided to compare different racial groups' percentages of incarcerated population. I filtered to obtain the most relevant year as well as grouped all the values together; in doing so, I wanted to see recent evidence of inequality nationwide. In analyzing the data, the group with the highest amount of incarcerated population is the `r summary_info$max_ratio_name` population, with a percentage of `r summary_info$max_year_black_pop`%, which may look unassuming however when put into relation against thousands to millions of US citizens is a fair amount. The highest amount of incarcerated `r summary_info$max_ratio_name` population is `r summary_info$max_ratio_location`. Follows are the remaining percentages: the Native American population at `r summary_info$max_year_native_pop`%, Latinx population at `r summary_info$max_year_latinx_pop`%, White population at `r summary_info$max_year_white_pop`%, and Asian American & Pacific Islander population at `r summary_info$max_year_aapi_pop`%. As shown, there is a large gap between the incarcerated `r summary_info$max_ratio_name` population as compared to the rest, so through this data analysis we have A) ensured that there _is_ a quantifiable inequality within the prison system and B) understood that this overpolicing and disproportionate incarceration heavily affects the `r summary_info$max_ratio_name` population, most especially in the nation's capital.
 
-[TODO ... other sections ... See Canvas for details]
+## Growth of the U.S. Prison Population
+```{r chart1, echo=FALSE, message=FALSE, warning = FALSE}
+plot_jail_pop_for_us()
+```
 
-_All the very best with your work!_
+Prison population, regardless of identity, has shot up since the 1970s. This chart represents that situation, showcasing the large increase of national jail population from 1970 to 2018. As shown, the population increase ben around the year 1980 and continued to climb 600k for almost 30 years. However, since around the year 2010, there has been a slight downward trend, dropping a little under 100k. This answers the question of how prison population has changed over the years, but brings about a new one: why has prison population shot up, and what happened in 2018 for prison population to decrease?
 
+## Growth of Prison Population by State 
+```{r chart2, echo=FALSE, message=FALSE, warning = FALSE}
+plot_jail_pop_by_states(c("WA", "OR", "CA"))
+```
+
+While the previous chart shows national prison population from 1970-2018, this chart shows prison population per state--specifically, the states of Washington, Oregon, and California. It's easy to see that while all of the populations trend up, Californias prison population is far higher than Washington and Oregon. This is evident of the way prison populations rise faster with a higher overall population; since California has a higher overall population compared to the other two states recorded in this chart. These three states were chosen to represent how higher population sizes correlate to higher prison population sizes, since (in order) California has a higher population count, followed by Washington then Oregon. This chart speaks to the question of the relationship between population size and prison population, but then again brings up a question: are individual states the problem when looking at prison population trends? For example, California with a far higher prison population may have worse discrimination within their incarceration systems--would Californian systems be the problem, or the federal/national system as a whole?
+
+## Different Racial Types' Ratio of Incarcerated to Non-Incarcerated Population
+```{r chart3, echo=FALSE, message=FALSE, warning = FALSE}
+plot_gender_pops()
+```
+
+This chart compares female and male incarceration rates to answer the question: is one gender disproportionately jailed? It appears that the male incarcerated population is far higher compared to the female incarcerated population on average throughout different jails in the United States as of recently. By looking at the trnd line, we can see that there are about 6 men for every 1 woman in prison. This shows that men are far more likely to be put in jail than women are. This is an upward trend that had only one outlier (a single prison with over 15k men compared to a few thousand woman) which was filtered out. This brings up the question: what facet of the incarceration system causes this?
+
+## Percentage of Incarcerated Black Population Compared to Total Population
+```{r map, echo=FALSE, message=FALSE, warning = FALSE}
+plot_black_ratio()
+```
+
+This map shows the percentage of the total population of the state that is incarcerated Black people. This answers the question of which area has the most incarcerated black population--not only does Louisiana have the highest percentage, the surrounding states also seem to have a relatively high ratio as well. This shows that the region with the highest incarcerated black people per total population is the Southeastern U.S., while the region with the least apprears to be the Northwest. This brings up the final question: why is this the Southeast of the US have such a high incarcerated Black population, while th Northwest doesn't? What is the difference between these two regions (population and policy wise)?
